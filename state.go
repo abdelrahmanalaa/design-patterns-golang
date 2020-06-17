@@ -16,6 +16,10 @@ func (s *stateContext) setState(newState State) {
 	s.state = newState
 }
 
+func (s *stateContext) switchMe() {
+	s.state.switchMe(s)
+}
+
 func main() {
 	stateContextInstance := createNew()
 
@@ -23,10 +27,6 @@ func main() {
 	stateContextInstance.switchMe()
 	stateContextInstance.switchMe()
 
-}
-
-func (s *stateContext) switchMe() {
-	s.state.switchMe(s)
 }
 
 type On struct {

@@ -27,7 +27,7 @@ func createUser(name string) *User {
 func main() {
 	abdelrahman := createUser("abdelrahman")
 	sondos := createUser("sondos")
-	//it mean that abdelrahman will follow sondos
+
 	abdelrahman.follow(sondos)
 	sondos.post("my first post")
 }

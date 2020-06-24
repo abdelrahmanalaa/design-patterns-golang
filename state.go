@@ -1,38 +1,25 @@
 package main
 
 type State interface {
-	switchMe(*stateContext)
+	switchMe(*StateContext)
 }
 
-type stateContext struct {
+type StateContext struct {
 	state State
 }
 
-func createNew() *stateContext {
-	return &stateContext{state: new(Off)}
-}
-
-func (s *stateContext) setState(newState State) {
+func (s *StateContext) setState(newState State) {
 	s.state = newState
 }
 
-func (s *stateContext) switchMe() {
+func (s *StateContext) switchMe() {
 	s.state.switchMe(s)
-}
-
-func main() {
-	stateContextInstance := createNew()
-
-	stateContextInstance.switchMe()
-	stateContextInstance.switchMe()
-	stateContextInstance.switchMe()
-
 }
 
 type On struct {
 }
 
-func (o *On) switchMe(s *stateContext) {
+func (o *On) switchMe(s *StateContext) {
 	println("state is on")
 	s.setState(new(Off))
 }
@@ -40,7 +27,21 @@ func (o *On) switchMe(s *stateContext) {
 type Off struct {
 }
 
-func (o *Off) switchMe(s *stateContext) {
+func (o *Off) switchMe(s *StateContext) {
 	println("state is off")
 	s.setState(new(On))
+}
+
+func createNewContext() *StateContext {
+	return &StateContext{state: new(Off)}
+}
+
+func main() {
+
+	stateContextInstance := createNewContext()
+
+	stateContextInstance.switchMe()
+	stateContextInstance.switchMe()
+	stateContextInstance.switchMe()
+
 }

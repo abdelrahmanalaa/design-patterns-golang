@@ -10,14 +10,13 @@ func (u *User) follow(following *User) {
 }
 
 func (u *User) post(text string) {
-	println("hello from " + u.name + " feed, post: " + text)
 	for _, follower := range u.followers {
 		follower.incomingFollowingPosts(text, u)
 	}
 }
 
 func (u *User) incomingFollowingPosts(text string, followingUser *User) {
-	println("hello from " + u.name + " feed, " + followingUser.name + "'s post: " + text)
+	println("hey " + u.name + " there is an incoming post from " + followingUser.name + ": " + text)
 }
 
 func createUser(name string) *User {
